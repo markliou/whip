@@ -39,6 +39,16 @@
           android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
           android:value="Maintains user-requested SSH connections to remote Herdr development sessions and monitors agent state for actionable notifications." />
       </service>
+      <receiver
+        android:name=".AgentStatusWidgetProvider"
+        android:exported="false">
+        <intent-filter>
+          <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+        </intent-filter>
+        <meta-data
+          android:name="android.appwidget.provider"
+          android:resource="@xml/agent_status_widget_info" />
+      </receiver>
       <activity
         android:name=".MainActivity"
         android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|assetsPaths"

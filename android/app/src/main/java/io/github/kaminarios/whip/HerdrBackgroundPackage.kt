@@ -9,6 +9,7 @@ class HerdrBackgroundPackage : ReactPackage {
   @Suppress("OVERRIDE_DEPRECATION")
   override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> =
     listOf(
+      AgentStatusWidgetModule(reactContext),
       ClipboardAttachmentModule(reactContext),
       CredentialVaultModule(reactContext),
       HerdrBackgroundModule(reactContext),

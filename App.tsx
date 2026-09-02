@@ -12,6 +12,7 @@ import { ReducedMotionProvider, WhipMark } from './src/components/app-ui';
 import { guiFontFamilies } from './src/lib/guiFonts';
 import { bundledAsset } from './src/lib/bundledAsset';
 import { terminalFontFamily } from './src/lib/terminalFonts';
+import { updateAgentWidgetSnapshot } from './src/services/agentWidget';
 import { reportBackgroundFailure } from './src/services/backgroundOperations';
 import { useAgentNotifications } from './src/hooks/useAgentNotifications';
 import { useAppNavigation } from './src/hooks/useAppNavigation';
@@ -125,6 +126,13 @@ function AppContent() {
     telemetry,
   });
   sessionsRef.current = sessions;
+
+  useEffect(() => {
+    reportBackgroundFailure(
+      updateAgentWidgetSnapshot(sessions.state),
+      'agent-widget-update',
+    );
+  }, [sessions.state]);
 
   const remoteFiles = useRemoteFilesController({
     getSessions: sessions.getState,
